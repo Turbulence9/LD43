@@ -12,19 +12,17 @@ let tileSize = 16;
 // Update current level when we make it to the next level (set initially to first level)
 //let currentLevel = exampleLevel;
 
-var clicked = 0;
+let clicked = 0;
+let curPos;
 
 canvas.addEventListener("mousemove", click, false);
 function click(event) {
-    var x = Math.floor((event.pageX - canvas.offsetLeft) / 16);
-    var y = Math.floor((event.pageY - canvas.offsetTop) / 16);
-    if (clicked == 1) {
-        if (currentLevel[y][x] == 1) {
-            currentLevel[y][x] = 0;
-        } else {
-            currentLevel[y][x] = 1;
-        }
+    let x = Math.floor((event.pageX - canvas.offsetLeft) / tileSize);
+    let y = Math.floor((event.pageY - canvas.offsetTop) / tileSize);
+    if (clicked == 1 && curPos != x + " " + y) {
+      currentLevel[y][x] = (currentLevel[y][x] == 1 ? 0 : 1);
     }
+    curPos = x + " " + y;
 };
 
 canvas.addEventListener("mousedown", down, false);
@@ -38,7 +36,7 @@ function up() {
 }
 
 function drawFog() {
-    
+
 }
 
 function update() {
