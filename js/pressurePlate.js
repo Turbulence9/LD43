@@ -3,6 +3,8 @@ class PressurePlate {
     this.state = {
       x: null,
       y: null,
+      width: 16,
+      height: 16,
       active: false
     };
   }
@@ -10,6 +12,11 @@ class PressurePlate {
   create(xValue, yValue) {
     this.state.x = xValue;
     this.state.y = yValue;
+  }
+
+  setDimensions(width, height) {
+    this.state.width = width;
+    this.state.height = height;
   }
 
   activate() {

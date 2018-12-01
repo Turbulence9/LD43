@@ -17,14 +17,21 @@ class Door {
     this.state = {
       x: null,
       y: null,
+      width: 16,
+      height: 16,
       conditionObjects: [],
       conditionsMet: false
     };
   }
 
-  create(xValue, yValue) {
+  draw(xValue, yValue) {
     this.state.x = xValue;
     this.state.y = yValue;
+  }
+
+  setDimensions(width, height) {
+    this.state.width = width;
+    this.state.height = height;
   }
 
   assignConditionObject(conditionObject) {
