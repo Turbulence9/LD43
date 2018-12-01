@@ -12,16 +12,34 @@ let tileSize = 16;
 // Update current level when we make it to the next level (set initially to first level)
 //let currentLevel = exampleLevel;
 
-canvas.addEventListener("click", click, false);
+var clicked = 0;
+
+canvas.addEventListener("mousemove", click, false);
 function click(event) {
     var x = Math.floor((event.pageX - canvas.offsetLeft) / 16);
     var y = Math.floor((event.pageY - canvas.offsetTop) / 16);
-    if (currentLevel[y][x] == 1) {
-        currentLevel[y][x] = 0;
-    } else {
-        currentLevel[y][x] = 1;
+    if (clicked == 1) {
+        if (currentLevel[y][x] == 1) {
+            currentLevel[y][x] = 0;
+        } else {
+            currentLevel[y][x] = 1;
+        }
     }
 };
+
+canvas.addEventListener("mousedown", down, false);
+function down() {
+    clicked = 1;
+}
+
+canvas.addEventListener("mouseup", up, false);
+function up() {
+    clicked = 0;
+}
+
+function drawFog() {
+    
+}
 
 function update() {
   // Loop through current level tiles and render objects to grid
@@ -37,7 +55,7 @@ function update() {
           ctx.drawImage(tile.sprite);
         } else {
           // Draw a red sqaure if no sprite for debug puposes
-          ctx.fillStyle = "#FF0000";
+          ctx.fillStyle = "#000000";
           ctx.fillRect(j * tileSize, i * tileSize, tileSize, tileSize);
         }
       }
