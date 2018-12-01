@@ -15,10 +15,7 @@
 class Door {
   constructor() {
     this.state = {
-      x: null,
-      y: null,
-      width: 16,
-      height: 16,
+      name: "door",
       conditionObjects: [],
       conditionsMet: false
     };
@@ -50,6 +47,7 @@ class Door {
   }
 
   isOpen() {
+    this.udateConditionsMet();
     return this.state.conditionsMet;
   }
 }

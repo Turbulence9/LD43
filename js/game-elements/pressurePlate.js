@@ -1,10 +1,7 @@
 class PressurePlate {
   constructor() {
     this.state = {
-      x: null,
-      y: null,
-      width: 16,
-      height: 16,
+      name: "plate",
       active: false
     };
   }

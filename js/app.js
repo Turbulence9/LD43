@@ -8,11 +8,13 @@ canvas.height = windowedHeight;
 
 function update() {
   canvas.width = canvas.width;
-  drawLevel();
   drawFog();
+  drawLevel();
+  ctx.fillStyle = "green";
   playerController();
   requestAnimationFrame(update);
 }
+
 
 window.addEventListener("load", function () {
   setupMap();
