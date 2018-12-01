@@ -13,6 +13,7 @@ function drawFog() {
 function update() {
   canvas.width = canvas.width;
   drawLevel();
+  playerController();
   requestAnimationFrame(update);
 }
 
