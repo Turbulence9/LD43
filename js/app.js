@@ -10,11 +10,23 @@ canvas.height = windowedHeight;
 let tileSize = 16;
 
 // Update current level when we make it to the next level (set initially to first level)
-let currentLevel = exampleLevel;
+//let currentLevel = exampleLevel;
+
+canvas.addEventListener("click", click, false);
+function click(event) {
+    var x = Math.floor((event.pageX - canvas.offsetLeft) / 16);
+    var y = Math.floor((event.pageY - canvas.offsetTop) / 16);
+    if (currentLevel[y][x] == 1) {
+        currentLevel[y][x] = 0;
+    } else {
+        currentLevel[y][x] = 1;
+    }
+};
 
 function update() {
   // Loop through current level tiles and render objects to grid
   // Dynamically changes size of grids depending on number of grids in level to fill the canvas
+  canvas.width = canvas.width;
   for (let i = 0; i < currentLevel.length; i++) {
     for (let j = 0; j < currentLevel[i].length; j++) {
       // Get the sprite for the object
@@ -35,8 +47,16 @@ function update() {
   requestAnimationFrame(update);
 }
 
+function setupMap() {
+    currentLevel = new Array(16);
+    for (i = 0; i < 64; i++) {
+        currentLevel[i] = new Array(16);
+    }
+    update();
+}
+
 window.addEventListener("load", function () {
-  update();
+  setupMap();
 });
 
 document.addEventListener("keydown", function (e) {
