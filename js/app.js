@@ -6,13 +6,10 @@ let windowedHeight = 640;
 canvas.width = windowedWidth;
 canvas.height = windowedHeight;
 
-function drawFog() {
-
-}
-
 function update() {
   canvas.width = canvas.width;
   drawLevel();
+  drawFog();
   playerController();
   requestAnimationFrame(update);
 }
