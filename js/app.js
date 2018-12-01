@@ -9,12 +9,6 @@ canvas.height = windowedHeight;
 // Generic tile properties
 let tileSize = 16;
 
-// Initialize generic objects (feel free to use any name here that's convient)
-let floor = {
-  // TODO: Add sprite here later (will render red rect if not specified)
-  sprite: null
-};
-
 // Update current level when we make it to the next level (set initially to first level)
 let currentLevel = exampleLevel;
 
