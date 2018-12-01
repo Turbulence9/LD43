@@ -33,7 +33,7 @@ function drawLevel() {
         } else {
           // Draw a red sqaure if no sprite for debug puposes
           ctx.fillStyle = "#000000";
-          ctx.fillRect(j * tileSize, i * tileSize, tileSize, tileSize);
+          ctx.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
         }
       }
     }
@@ -57,7 +57,7 @@ function click(event) {
     let x = Math.floor((event.pageX - canvas.offsetLeft) / tileSize);
     let y = Math.floor((event.pageY - canvas.offsetTop) / tileSize);
     if (clicked == 1 && curPos != x + " " + y) {
-      currentLevel[y][x] = (currentLevel[y][x] == 1 ? 0 : 1);
+      currentLevel[x][y] = (currentLevel[x][y] == 1 ? 0 : 1);
     }
     curPos = x + " " + y;
 };
@@ -67,7 +67,7 @@ function down() {
     clicked = 1;
     let x = Math.floor((event.pageX - canvas.offsetLeft) / tileSize);
     let y = Math.floor((event.pageY - canvas.offsetTop) / tileSize);
-    currentLevel[y][x] = (currentLevel[y][x] == 1 ? 0 : 1);
+    currentLevel[x][y] = (currentLevel[x][y] == 1 ? 0 : 1);
 }
 
 canvas.addEventListener("mouseup", up, false);
