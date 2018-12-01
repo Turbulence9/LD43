@@ -9,7 +9,7 @@ class Lever {
     };
   }
 
-  create(xValue, yValue) {
+  setCoordinates(xValue, yValue) {
     this.state.x = xValue;
     this.state.y = yValue;
   }
