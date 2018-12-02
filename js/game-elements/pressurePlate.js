@@ -1,7 +1,7 @@
 class PressurePlate {
   constructor() {
+    this.name = "plate";
     this.state = {
-      name: "plate",
       active: false
     };
   }

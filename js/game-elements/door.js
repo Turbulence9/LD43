@@ -14,8 +14,8 @@
 
 class Door {
   constructor() {
+    this.name = "door";
     this.state = {
-      name: "door",
       conditionObjects: [],
       conditionsMet: false
     };
@@ -43,7 +43,6 @@ class Door {
       }
     }
     this.state.conditionsMet = newValue;
-    console.log(newValue);
   }
 
   isOpen() {

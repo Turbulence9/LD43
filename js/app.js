@@ -10,8 +10,8 @@ function update() {
   canvas.width = canvas.width;
   drawFog();
   drawLevel();
-  ctx.fillStyle = "green";
   playerController();
+  drawHud();
   requestAnimationFrame(update);
 }
 
