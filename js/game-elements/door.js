@@ -46,10 +46,10 @@ class Door {
       }
     }
     this.state.conditionsMet = newValue;
-    console.log(newValue);
   }
 
   isOpen() {
+    udateConditionsMet();
     return this.state.conditionsMet;
   }
 }
