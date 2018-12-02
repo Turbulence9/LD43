@@ -7,13 +7,14 @@ function drawFog() {
     var maskCtx = maskCanvas.getContext('2d');
 
     // This color is the one of the filled shape
-    maskCtx.fillStyle = "gray";
-    let pattern = ctx.createPattern(magnetPic, 'repeat');
+    let pattern = ctx.createPattern(brick, 'repeat');
+    let patternDark = ctx.createPattern(brickDark, 'repeat');
+    maskCtx.fillStyle = patternDark;
     //maskCtx.fillStyle = pattern;
     // Fill the mask
     maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
     // Set xor operation
-    maskCtx.globalCompositeOperation = 'destination-out';
+    maskCtx.globalCompositeOperation ='destination-out'; //destination-out
     let xmonster = monster.x + (monster.width / 2);
     let ymonster = monster.y + (monster.width / 2);
     let maxVision = 350;
@@ -135,8 +136,8 @@ function drawFog() {
             }
         }
     }
-    ctx.fillStyle = "skyblue";
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(maskCanvas, 0, 0);
     ctx.drawImage(maskCanvas, 0, 0);
 }
