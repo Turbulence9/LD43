@@ -8,8 +8,8 @@ canvas.height = windowedHeight;
 
 function update() {
   canvas.width = canvas.width;
-  drawLevel();
   drawFog();
+  drawLevel();
   playerController();
   requestAnimationFrame(update);
 }
