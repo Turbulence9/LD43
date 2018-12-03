@@ -6,6 +6,7 @@ let monster = {
   defaultSpd: 4,
   speed: 4,
   headIndex: null,
+  retractLimbs: false,
   limbs: [
     {
       code: 67,
@@ -138,6 +139,30 @@ function movePlayer() {
       }
     }
   }
+  if (monster.retractLimbs) {
+      let allback = true;
+      monster.limbs.forEach(limb => {
+          if (!limb.attached) {
+              let deltaLimbX = monster.x - limb.x;
+              let deltaLimbY = monster.y - limb.y;
+              let limbHyp = Math.sqrt(Math.pow(deltaLimbX, 2) + Math.pow(deltaLimbY, 2));
+              detlaLimbX = 2 * (deltaLimbX / limbHyp);
+              detlaLimbY = 2 * (deltaLimbY / limbHyp);
+              limb.x += detlaLimbX;
+              limb.y += detlaLimbY;
+              if (Math.abs(limb.x - monster.x) < 5 && Math.abs(limb.x - monster.x) < 5) {
+                  limb.x = null;
+                  limb.y = null;
+                  limb.attached = true;
+              } else {
+                  allback = false;
+              }
+          }
+      })
+      if (allback == true) {
+          monster.retractLimbs = false;
+      }
+  }
 }
 
 function tileEmpty(x,y) {
@@ -233,12 +258,8 @@ function checkLimbs() {
       monster.speed-= 1
     }
   })
-  if(keyCodes[81]) {
-    monster.limbs.forEach(limb => {
-      limb.x = null;
-      limb.y = null;
-      limb.attached = true;
-    })
+  if (keyCodes[81]) {
+      monster.retractLimbs = true;
   }
 }
 

@@ -120,3 +120,28 @@ canvas.addEventListener("mouseup", up, false);
 function up() {
     clicked = 0;
 }
+
+function printLevel() {
+    let printer = "";
+    printer += "let currentLevel = [\n";
+    for (i = 0; i < currentLevel.length; i++) {
+        printer += "[";
+        for (j = 0; j < currentLevel[i].length; j++) {
+            if (currentLevel[i][j] == d) {
+                
+            }
+            if (j == currentLevel[i].length - 1) {
+                printer += "" + currentLevel[i][j];
+            } else {
+                printer += "" + currentLevel[i][j] + ",";
+            }
+        }
+        if (i == currentLevel.length - 1) {
+            printer += "]\n";
+        } else {
+            printer += "],\n";
+        }
+    }
+    printer += "];";
+    console.log(printer);
+}
