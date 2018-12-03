@@ -6,13 +6,13 @@ let windowedHeight = 640;
 canvas.width = windowedWidth;
 canvas.height = windowedHeight;
 
-let maxVision = 8000;
+let maxVision = 80;
 let visionItems = [monster];
 let tileSize = 16;
 let setup = true;
 function update() {
   canvas.width = canvas.width;
-  //drawFog();
+  drawFog();
   drawLevel();
   playerController();
   drawHud();
