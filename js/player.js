@@ -95,16 +95,16 @@ function movePlayer() {
     x : 0,
     y : 0
   };
-  if (keyCodes[65]) {
+  if (keyCodes[65] || keyCodes[37]) {
     dir.x--;
   }
-  if (keyCodes[87]) {
+  if (keyCodes[87] || keyCodes[38]) {
     dir.y--;
   }
-  if (keyCodes[68]) {
+  if (keyCodes[68] || keyCodes[39]) {
     dir.x++;
   }
-  if (keyCodes[83]) {
+  if (keyCodes[83] || keyCodes[40]) {
     dir.y++;
   }
   let curSpd;

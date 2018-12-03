@@ -44,7 +44,7 @@ function update() {
             gamestart = false;
           }
       } else {
-          ctx.drawImage(magnetPic, 0, 0, 1024, 640);
+          ctx.drawImage(spr_win, 0, 0, 1024, 640);
       }
 
       if (keyCodes[32] == true) {
