@@ -73,16 +73,27 @@ function drawLevel() {
         if (setup) {
           tile.setCoordinates(i*tileSize,j*tileSize);
         }
-        if ((tile.state.name != "door" || (tile.state.name == "door" && !tile.isOpen())) && Math.hypot(tile.state.x-monster.x, tile.state.y-monster.y) <= maxVision) {
+        if ((tile.state.name != "door" || (tile.state.name == "door" && !tile.isOpen())) && inVision(tile.state.x, tile.state.y)) {
           ctx.drawImage(tile.state.sprite,tile.state.x,tile.state.y);
         }
-      } else if (tile == 1 && Math.hypot(i * tileSize-monster.x, j * tileSize-monster.y) <= maxVision) {
-          ctx.fillStyle = "rgba(0, 0, 0, 0.38)";
+      } else if (tile == 1 && inVision(i * tileSize, j * tileSize)) {
+          ctx.fillStyle = "#2e2e2e";
           ctx.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
         }
       }
     }
   }
+
+function inVision(x,y) {
+  let vision = false;
+  visionItems.forEach(visionItem => {
+    if (Math.hypot(x-visionItem.x, y-visionItem.y) <= maxVision) {
+      vision = true;
+    }
+  });
+  return vision;
+}
+
 
 let clicked = 0;
 let curPos;
