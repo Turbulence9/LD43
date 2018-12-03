@@ -32,7 +32,7 @@ let level1 = [
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,"s",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
   [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -51,6 +51,8 @@ let level1 = [
 let levels = [level1];
 let levelIndex = 0;
 let currentLevel = levels[levelIndex];
+let restartPointX;
+let restartPointY;
 
 const flipMatrix = matrix => (
   matrix[0].map((column, index) => (
@@ -73,6 +75,12 @@ function drawLevel() {
     for (let j = 0; j < currentLevel[i].length; j++) {
       // Get the sprite for the object
       let tile = currentLevel[i][j];
+      if (setup && tile == "s") {
+        monster.x = i * tileSize;
+        monster.y = j * tileSize;
+        restartPointX = monster.x;
+        restartPointY = monster.y;
+      }
       if (typeof tile == "object") {
         if (setup) {
           tile.setCoordinates(i*tileSize,j*tileSize);
@@ -132,7 +140,7 @@ function printLevel() {
         printer += "[";
         for (j = 0; j < currentLevel[i].length; j++) {
             if (currentLevel[i][j] == d) {
-                
+
             }
             if (j == currentLevel[i].length - 1) {
                 printer += "" + currentLevel[i][j];
@@ -148,4 +156,14 @@ function printLevel() {
     }
     printer += "];";
     console.log(printer);
+}
+
+function restartLevel() {
+  monster.limbs.forEach(limb => {
+    limb.attached = true;
+    limb.x = null;
+    limb.y = null;
+  })
+  monster.x = restartPointX;
+  monster.y = restartPointY;
 }
