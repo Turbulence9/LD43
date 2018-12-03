@@ -15,12 +15,15 @@ function drawFog() {
     maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
     // Set xor operation
     maskCtx.globalCompositeOperation ='destination-out'; //destination-out
-    visionItems = [monster]
+    visionItems = []
     if (monster.limbs[4].x != null) {
       visionItems.push(monster.limbs[4]);
     }
     if (monster.limbs[5].x != null) {
       visionItems.push(monster.limbs[5]);
+    }
+    if (visionItems.length != 2) {
+      visionItems.push(monster);
     }
     visionItems.forEach(visionItem => {
     let xmonster = visionItem.x + (visionItem.width / 2);
