@@ -14,10 +14,15 @@
 
 class Door {
   constructor() {
-    this.name = "door";
     this.state = {
+      name: "door",
+      x: null,
+      y: null,
+      width: 48,
+      height: 16,
       conditionObjects: [],
-      conditionsMet: false
+      conditionsMet: false,
+      sprite: spr_door
     };
   }
 
@@ -26,10 +31,6 @@ class Door {
     this.state.y = yValue;
   }
 
-  setDimensions(width, height) {
-    this.state.width = width;
-    this.state.height = height;
-  }
 
   assignConditionObject(conditionObject) {
     this.state.conditionObjects.push(conditionObject);

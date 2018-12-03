@@ -1,5 +1,6 @@
 class Lever {
   constructor() {
+    this.name = "lever";
     this.state = {
       x: null,
       y: null,

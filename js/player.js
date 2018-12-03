@@ -3,32 +3,49 @@ let monster = {
   y: 100,
   width: 32,
   height: 32,
-  speed: 3,
+  defaultSpd: 4,
+  speed: 4,
   headIndex: null,
   limbs: [
     {
+      code: 67,
       name: "leftArm",
       attached: true,
       x: null,
-      y: null
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterLeftArmDetatched
     },
     {
+      code: 86,
       name: "rightArm",
       attached: true,
       x: null,
-      y: null
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterRightArmDetatched
     },
     {
+      code: 66,
       name: "leftLeg",
       attached: true,
       x: null,
-      y: null
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterLeftLegDetatched
     },
     {
+      code: 78,
       name: "rightLeg",
       attached: true,
       x: null,
-      y: null
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterRightLegDetatched
     },
   ]
 }
@@ -39,7 +56,9 @@ let dir = {
 };
 
 function playerController() {
+  checkLimbs();
   movePlayer();
+  drawLimbs();
   drawPlayer();
   checkGameEvents(monster.x + monster.width/2 ,monster.y + monster.height/2);
 }
@@ -107,28 +126,31 @@ function tileEmpty(x,y) {
   if (block == 1) {
     solid = false;
   }
-  if (block.name == "door") {
-    if (!block.isOpen()) {
-      solid = false;
+  if (block.state) {
+    if (block.state.name == "door") {
+      if (!block.isOpen()) {
+        solid = false;
+      }
     }
   }
   return solid;
 }
 
 function checkGameEvents(x,y) {
-  p.deactivate();
-  if (tileBlock(x-8,y).name == "plate") {
-    p.activate();
-  }
-  if (tileBlock(x-8,y-8).name == "plate") {
-    p.activate();
-  }
-  if (tileBlock(x+8,y).name == "plate") {
-    p.activate();
-  }
-  if (tileBlock(x+8,y+8).name == "plate") {
-    p.activate();
-  }
+  let activeUnits = [monster];
+  monster.limbs.forEach(limb => {
+    if (!limb.attached) {
+      activeUnits.push(limb);
+    }
+  })
+  plates.forEach(plate => {
+    plate.deactivate();
+    activeUnits.forEach(unit => {
+      if (boxCollision(unit.x,unit.y,unit.width,unit.height,plate.state.x,plate.state.y,plate.state.width,plate.state.height)) {
+        plate.activate();
+      }
+    })
+  });
 }
 
 function tileBlock(x,y) {
@@ -161,7 +183,42 @@ function drawPlayer() {
   if (dir.x == -1 && dir.y == -1) {
     monster.headIndex = 7;
   }
+  if (monster.limbs[0].attached) {
+    ctx.drawImage(monsterLeftArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+  }
+  if (monster.limbs[1].attached) {
+    ctx.drawImage(monsterRightArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+  }
+  if (monster.limbs[2].attached) {
+    ctx.drawImage(monsterLeftLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+  }
+  if (monster.limbs[3].attached) {
+    ctx.drawImage(monsterRightLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+  }
   ctx.drawImage(monsterHead,32*monster.headIndex,0,monster.width,monster.height,monster.x,monster.y,monster.width,monster.height)
 }
-document.addEventListener("keydown", function (e) {
-}, false);
+
+function checkLimbs() {
+  monster.speed = monster.defaultSpd;
+  monster.limbs.forEach(limb => {
+    if (keyCodes[limb.code] && limb.attached) {
+      limb.attached = false;
+      limb.x = monster.x + 6;
+      limb.y = monster.y + 6;
+    }
+    if (limb.name == "leftLeg" && !limb.attached) {
+      monster.speed-= 1
+    }
+    if (limb.name == "rightLeg" && !limb.attached) {
+      monster.speed-= 1
+    }
+  })
+}
+
+function drawLimbs() {
+  monster.limbs.forEach(limb => {
+    if (!limb.attached && Math.hypot(limb.x-monster.x, limb.y-monster.y) <= maxVision) {
+      ctx.drawImage(limb.sprite,limb.x,limb.y);
+    }
+  })
+}

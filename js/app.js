@@ -6,22 +6,27 @@ let windowedHeight = 640;
 canvas.width = windowedWidth;
 canvas.height = windowedHeight;
 
+let maxVision = 80;
+let tileSize = 16;
+let setup = true;
 function update() {
   canvas.width = canvas.width;
   drawFog();
   drawLevel();
   playerController();
   drawHud();
+  setup = false;
   requestAnimationFrame(update);
 }
 
 
 window.addEventListener("load", function () {
-  setupMap();
+  update();
 });
 
-document.addEventListener("keydown", function (e) {
-}, false);
-
-document.addEventListener("keyup", function (e) {
-}, false);
+function boxCollision(x1, y1, width1, height1, x2, y2, width2, height2) {
+  if (x1+width1 > x2 && x1 < x2+width2 && y1+height1 > y2 && y1 < y2+height2) {
+    return true;
+  }
+  return false;
+}

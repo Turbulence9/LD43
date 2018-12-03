@@ -17,7 +17,6 @@ function drawFog() {
     maskCtx.globalCompositeOperation ='destination-out'; //destination-out
     let xmonster = monster.x + (monster.width / 2);
     let ymonster = monster.y + (monster.width / 2);
-    let maxVision = 100;
     let closestToPlayer = [];
     for (i = 0; i < currentLevel.length; i++) {
         for (j = 0; j < currentLevel[i].length; j++) {

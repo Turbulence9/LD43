@@ -1,8 +1,13 @@
 class PressurePlate {
   constructor() {
-    this.name = "plate";
     this.state = {
-      active: false
+      x: null,
+      y: null,
+      width: 32,
+      height: 32,
+      name: "plate",
+      active: false,
+      sprite: spr_pressure_plate
     };
   }
 
@@ -11,17 +16,16 @@ class PressurePlate {
     this.state.y = yValue;
   }
 
-  setDimensions(width, height) {
-    this.state.width = width;
-    this.state.height = height;
-  }
-
   activate() {
     this.state.active = true;
   }
 
   deactivate() {
     this.state.active = false;
+  }
+
+  nextSprite() {
+    this.spriteCount = (this.spriteCount + 1) % 4;
   }
 
   isActive() {

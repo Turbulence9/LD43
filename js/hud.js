@@ -1,12 +1,12 @@
 function drawHud() {
   ctx.fillStyle = "#000000";
-  ctx.fillRect(940,20,64,64);
-  ctx.fillRect(870,20,64,64);
-  ctx.fillRect(800,20,64,64);
-  ctx.fillRect(730,20,64,64);
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(944,24,56,56);
-  ctx.fillRect(874,24,56,56);
-  ctx.fillRect(804,24,56,56);
-  ctx.fillRect(734,24,56,56);
+  ctx.drawImage(iconBackground,730,20);
+  ctx.drawImage(iconBackground,800,20);
+  ctx.drawImage(iconBackground,870,20);
+  ctx.drawImage(iconBackground,940,20);
+  ctx.drawImage(monsterLeftArmDetatched,738,28,48,48);
+  ctx.drawImage(monsterRightArmDetatched,808,28,48,48);
+  ctx.drawImage(monsterLeftLegDetatched,878,28,48,48);
+  ctx.drawImage(monsterRightLegDetatched,948,28,48,48);
+  
 }
