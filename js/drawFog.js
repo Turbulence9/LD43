@@ -134,7 +134,11 @@ function drawFog() {
                 blackListedAngle.splice(nextIndex, 1);
                 j = -1;
             } else if (blackListedAngle[j].max - 2 * Math.PI > blackListedAngle[nextIndex].min) {
-                blackListedAngle[j].max = (2 * Math.PI) + blackListedAngle[nextIndex].max;
+                let maxVal = (2 * Math.PI) + blackListedAngle[nextIndex].max;;
+                if (maxVal < blackListedAngle[j].max) {
+                    maxVal = blackListedAngle[j].max;
+                }
+                blackListedAngle[j].max = maxVal;
                 blackListedAngle.splice(nextIndex, 1);
                 j = -1;
             }
