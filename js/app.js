@@ -10,6 +10,7 @@ canvas.height = windowedHeight;
 let developer_mode = false;
 let gameover = false;
 let gamestart = false;
+let win = false;
 
 let maxVision = 80;
 let visionItems = [monster];
@@ -27,9 +28,15 @@ function update() {
       drawHud();
       setup = false;
   } else if (gameover == true) {
-      ctx.drawImage(end, 0, 0, 1024, 640);
+      if (win == false) {
+          ctx.drawImage(end, 0, 0, 1024, 640);
+      } else {
+          ctx.drawImage(magnetPic, 0, 0, 1024, 640);
+      }
+
       if (keyCodes[32] == true) {
           gamestart = false;
+          gameover = false;
           monster.limbs.forEach(limb => {
               limb.attached = true;
               limb.x = null;
@@ -37,8 +44,8 @@ function update() {
           })
           levelIndex = 0;
           setup = true;
+          win = false;
           drawLevel();
-
       }
   } else {
         //start screen

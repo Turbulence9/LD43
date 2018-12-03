@@ -204,6 +204,7 @@ function checkGameEvents(x,y) {
           limb.y = null;
       })
       if (levelIndex == levels.length) {
+          win = true;
           gameover = true;
       } else {
           setup = true;
