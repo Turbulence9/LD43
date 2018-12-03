@@ -1,6 +1,7 @@
 let keyCodes = {};
 
 document.body.addEventListener("keydown", function(e) {
+	audio.play();
   if(e.keyCode == 80) {
 	  printLevel();
   }

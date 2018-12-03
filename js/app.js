@@ -6,17 +6,47 @@ let windowedHeight = 640;
 canvas.width = windowedWidth;
 canvas.height = windowedHeight;
 
+//set this to true to create levels more easily
+let developer_mode = false;
+let gameover = false;
+let gamestart = false;
+
 let maxVision = 80;
 let visionItems = [monster];
 let tileSize = 16;
 let setup = true;
 function update() {
   canvas.width = canvas.width;
-  drawFog();
-  drawLevel();
-  playerController();
-  drawHud();
-  setup = false;
+  if (developer_mode) {
+    maxVision = 8000;
+  }
+  if (gameover == false && gamestart == true) {
+      drawFog();
+      drawLevel();
+      playerController();
+      drawHud();
+      setup = false;
+  } else if (gameover == true) {
+      ctx.drawImage(end, 0, 0, 1024, 640);
+      if (keyCodes[32] == true) {
+          gamestart = false;
+          monster.limbs.forEach(limb => {
+              limb.attached = true;
+              limb.x = null;
+              limb.y = null;
+          })
+          levelIndex = 0;
+          setup = true;
+          drawLevel();
+
+      }
+  } else {
+        //start screen
+      ctx.drawImage(start, 0, 0, 1024, 640);
+      if (keyCodes[32] == true) {
+          gamestart = true;
+      }
+  }
   requestAnimationFrame(update);
 }
 

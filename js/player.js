@@ -146,8 +146,8 @@ function movePlayer() {
               let deltaLimbX = monster.x - limb.x;
               let deltaLimbY = monster.y - limb.y;
               let limbHyp = Math.sqrt(Math.pow(deltaLimbX, 2) + Math.pow(deltaLimbY, 2));
-              detlaLimbX = 2 * (deltaLimbX / limbHyp);
-              detlaLimbY = 2 * (deltaLimbY / limbHyp);
+              detlaLimbX = monster.speed * (deltaLimbX / limbHyp);
+              detlaLimbY = monster.speed * (deltaLimbY / limbHyp);
               limb.x += detlaLimbX;
               limb.y += detlaLimbY;
               if (Math.abs(limb.x - monster.x) < 5 && Math.abs(limb.x - monster.x) < 5) {
@@ -203,8 +203,12 @@ function checkGameEvents(x,y) {
           limb.x = null;
           limb.y = null;
       })
-      setup = true;
-      drawLevel()
+      if (levelIndex == levels.length) {
+          gameover = true;
+      } else {
+          setup = true;
+          drawLevel();
+      }
   }
 }
 
