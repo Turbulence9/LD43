@@ -39,4 +39,10 @@ function drawHud() {
   }
   ctx.drawImage(recall,480,20,64,64);
   ctx.drawImage(letters,452,6,562,204);
+
+  ctx.fillStyle="#484848";
+  ctx.fillStyle="#000000";
+  ctx.fillRect(5, 22, 460, 58);
+  ctx.drawImage(spr_bloodMeter,(bloodCount%16*600),0,450,48,10, 27, 450, 48);
+  ctx.fillRect(460, 27, -450*((health.max-health.value)/health.max), 48);
 }

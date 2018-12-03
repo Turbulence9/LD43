@@ -11,13 +11,22 @@ let developer_mode = false;
 let gameover = false;
 let gamestart = false;
 let win = false;
-
+let count = 0;
+let bloodCount = 0;
+let health = {
+  value: 2000,
+  max: 2000
+}
 let maxVision = 80;
 let visionItems = [monster];
 let tileSize = 16;
 let setup = true;
 function update() {
   canvas.width = canvas.width;
+  count++;
+  if (count % 2 == 0) {
+    bloodCount++;
+  }
   if (developer_mode) {
     maxVision = 8000;
   }
@@ -30,6 +39,10 @@ function update() {
   } else if (gameover == true) {
       if (win == false) {
           ctx.drawImage(end, 0, 0, 1024, 640);
+          if (keyCodes[82]) {
+            gameover = false;
+            gamestart = false;
+          }
       } else {
           ctx.drawImage(magnetPic, 0, 0, 1024, 640);
       }

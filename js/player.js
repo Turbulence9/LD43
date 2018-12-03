@@ -78,10 +78,16 @@ let dir = {
 
 function playerController() {
   checkLimbs();
+  missingLimbs();
+  hasLimbs();
   movePlayer();
   drawLimbs();
   drawPlayer();
   checkGameEvents(monster.x + monster.width/2 ,monster.y + monster.height/2);
+  if (health.value <= 0) {
+    gameover = true;
+    win = false;
+  }
 }
 
 function movePlayer() {
@@ -102,6 +108,9 @@ function movePlayer() {
     dir.y++;
   }
   let curSpd;
+  if (dir.x != 0 || dir.y != 0) {
+    step_audio.play();
+  }
   if (dir.x != 0 && dir.y != 0) {
     curSpd = Math.sqrt(monster.speed*monster.speed/2);
   } else {
@@ -154,6 +163,11 @@ function movePlayer() {
                   limb.x = null;
                   limb.y = null;
                   limb.attached = true;
+                  pop_audio.play();
+                  setTimeout(function(){
+                    pop_audio.pause();
+                    pop_audio.currentTime = 0;
+                  }, 100);
               } else {
                   allback = false;
               }
@@ -256,14 +270,30 @@ function drawPlayer() {
     if (monster.limbs[3].attached) {
       ctx.drawImage(monsterRightLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
     }
-    ctx.drawImage(monsterHead,32*monster.headIndex,0,monster.width,monster.height,monster.x,monster.y,monster.width,monster.height)
+    ctx.drawImage(monsterHead,32*monster.headIndex,0,monster.width,monster.height,monster.x,monster.y,monster.width,monster.height);
+    if (monster.retractLimbs) {
+      ctx.drawImage(magnetPic,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+    }
   }
 }
 
 function checkLimbs() {
   monster.speed = monster.defaultSpd;
-  monster.limbs.forEach(limb => {
+  monster.limbs.forEach((limb,i) => {
     if (keyCodes[limb.code] && limb.attached) {
+      if (i < 4) {
+        limbOff_audio.play();
+        setTimeout(function(){
+          limbOff_audio.pause();
+          limbOff_audio.currentTime = 0;
+        }, 200);
+      } else {
+        eyeOff_audio.play();
+        setTimeout(function(){
+          limbOff_audio.pause();
+          limbOff_audio.currentTime = 0;
+        }, 200);
+      }
       limb.attached = false;
       limb.x = monster.x + 6;
       limb.y = monster.y + 6;
@@ -286,4 +316,55 @@ function drawLimbs() {
       ctx.drawImage(limb.sprite,limb.x,limb.y);
     }
   })
+}
+
+function missingLimbs() {
+  monster.limbs.forEach(limb => {
+    if (limb.name == "leftLeg" && !limb.attached) {
+      health.value -= 10;
+    } else if (limb.name == "leftArm" && !limb.attached) {
+      health.value -= 10;
+    } else if (limb.name == "rightArm" && !limb.attached) {
+      health.value -= 10;
+    } else if (limb.name == "rightLeg" && !limb.attached) {
+      health.value -= 10;
+    } else {
+
+      console.log("***test**");
+    }
+  })
+}
+
+
+function missingLimbs() {
+  monster.limbs.forEach(limb => {
+    if (limb.name == "leftLeg" && !limb.attached) {
+      health.value -= 1;
+    } else if (limb.name == "leftArm" && !limb.attached) {
+      health.value -= 1;
+    } else if (limb.name == "rightArm" && !limb.attached) {
+      health.value -= 1;
+    } else if (limb.name == "rightLeg" && !limb.attached) {
+      health.value -= 1;
+    } else {
+    }
+  })
+  if (health.value < 0) {
+    health.value = 0;
+  }
+}
+
+function hasLimbs() {
+   let allAttached = true;
+   monster.limbs.forEach(limb => {
+     if (!limb.attached) {
+       allAttached = false;
+     }
+  });
+  if (allAttached) {
+    health.value += 10;
+  }
+  if (health.value > health.max) {
+    health.value = health.max;
+  }
 }
