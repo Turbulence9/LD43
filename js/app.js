@@ -13,6 +13,9 @@ let gamestart = false;
 let win = false;
 let count = 0;
 let bloodCount = 0;
+var volume = 280;
+var musicVolume = 0.4 * (volume / 280);
+music.volume = musicVolume;
 let health = {
   value: 2000,
   max: 2000
@@ -50,11 +53,13 @@ function update() {
       if (keyCodes[32] == true) {
           gamestart = false;
           gameover = false;
+          keyCodes[32] = false;
           monster.limbs.forEach(limb => {
               limb.attached = true;
               limb.x = null;
               limb.y = null;
           })
+          health.value = health.max;
           levelIndex = 0;
           setup = true;
           win = false;

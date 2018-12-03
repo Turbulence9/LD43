@@ -212,6 +212,7 @@ function checkGameEvents(x,y) {
   });
   if (boxCollision(x, y, monster.width, monster.height, ladder.state.x+30, ladder.state.y, ladder.state.width, ladder.state.height)) {
       levelIndex++;
+      health.value = health.max;
       monster.limbs.forEach(limb => {
           limb.attached = true;
           limb.x = null;

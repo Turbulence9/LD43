@@ -48,6 +48,8 @@ let spr_win = new Image(1024, 640);
 spr_win.src = 'assets/win.png';
 let end = new Image(1024, 640);
 end.src = 'assets/end.png';
+let soundIcon = new Image(32, 32);
+soundIcon.src = 'assets/soundIcon.png';
 let music = new Audio('assets/spooky.wav');
 music.loop = true;
 music.pause();

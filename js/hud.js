@@ -44,5 +44,10 @@ function drawHud() {
   ctx.fillStyle="#000000";
   ctx.fillRect(5, 22, 460, 58);
   ctx.drawImage(spr_bloodMeter,(bloodCount%16*600),0,450,48,10, 27, 450, 48);
-  ctx.fillRect(460, 27, -450*((health.max-health.value)/health.max), 48);
+  ctx.fillRect(460, 27, -450 * ((health.max - health.value) / health.max), 48);
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(5, 100, 290, 32);
+  ctx.fillStyle = "#616060";
+  ctx.fillRect(10, 106, volume, 20);
+  ctx.drawImage(soundIcon, 300, 100);
 }
