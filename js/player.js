@@ -158,8 +158,8 @@ function tileEmpty(x,y) {
 
 function checkGameEvents(x,y) {
   let activeUnits = [monster];
-  monster.limbs.forEach(limb => {
-    if (!limb.attached) {
+  monster.limbs.forEach((limb,i) => {
+    if (!limb.attached && i < 4) {
       activeUnits.push(limb);
     }
   })
@@ -203,19 +203,21 @@ function drawPlayer() {
   if (dir.x == -1 && dir.y == -1) {
     monster.headIndex = 7;
   }
-  if (monster.limbs[0].attached) {
-    ctx.drawImage(monsterLeftArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+  if (inVision(monster.x,monster.y)) {
+    if (monster.limbs[0].attached) {
+      ctx.drawImage(monsterLeftArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+    }
+    if (monster.limbs[1].attached) {
+      ctx.drawImage(monsterRightArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+    }
+    if (monster.limbs[2].attached) {
+      ctx.drawImage(monsterLeftLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+    }
+    if (monster.limbs[3].attached) {
+      ctx.drawImage(monsterRightLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
+    }
+    ctx.drawImage(monsterHead,32*monster.headIndex,0,monster.width,monster.height,monster.x,monster.y,monster.width,monster.height)
   }
-  if (monster.limbs[1].attached) {
-    ctx.drawImage(monsterRightArm,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
-  }
-  if (monster.limbs[2].attached) {
-    ctx.drawImage(monsterLeftLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
-  }
-  if (monster.limbs[3].attached) {
-    ctx.drawImage(monsterRightLeg,64*monster.headIndex,0,64,64,monster.x-16,monster.y-16,64,64)
-  }
-  ctx.drawImage(monsterHead,32*monster.headIndex,0,monster.width,monster.height,monster.x,monster.y,monster.width,monster.height)
 }
 
 function checkLimbs() {

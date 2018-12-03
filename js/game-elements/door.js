@@ -31,6 +31,10 @@ class Door {
     this.state.y = yValue;
   }
 
+  setVertical() {
+    this.state.sprite = spr_door_vertical;
+  }
+
 
   assignConditionObject(conditionObject) {
     this.state.conditionObjects.push(conditionObject);
