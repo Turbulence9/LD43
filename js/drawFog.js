@@ -15,8 +15,16 @@ function drawFog() {
     maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
     // Set xor operation
     maskCtx.globalCompositeOperation ='destination-out'; //destination-out
-    let xmonster = monster.x + (monster.width / 2);
-    let ymonster = monster.y + (monster.width / 2);
+    visionItems = [monster]
+    if (monster.limbs[4].x != null) {
+      visionItems.push(monster.limbs[4]);
+    }
+    if (monster.limbs[5].x != null) {
+      visionItems.push(monster.limbs[5]);
+    }
+    visionItems.forEach(visionItem => {
+    let xmonster = visionItem.x + (visionItem.width / 2);
+    let ymonster = visionItem.y + (visionItem.width / 2);
     let closestToPlayer = [];
     for (i = 0; i < currentLevel.length; i++) {
         for (j = 0; j < currentLevel[i].length; j++) {
@@ -144,6 +152,7 @@ function drawFog() {
             }
         }
     }
+  })
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(maskCanvas, 0, 0);

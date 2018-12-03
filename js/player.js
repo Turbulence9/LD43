@@ -47,6 +47,26 @@ let monster = {
       height: 24,
       sprite: monsterRightLegDetatched
     },
+    {
+      code: 90,
+      name: "leftEye",
+      attached: true,
+      x: null,
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterLeftEye
+    },
+    {
+      code: 88,
+      name: "rightEye",
+      attached: true,
+      x: null,
+      y: null,
+      width: 24,
+      height: 24,
+      sprite: monsterRightEye
+    }
   ]
 }
 
@@ -213,11 +233,18 @@ function checkLimbs() {
       monster.speed-= 1
     }
   })
+  if(keyCodes[81]) {
+    monster.limbs.forEach(limb => {
+      limb.x = null;
+      limb.y = null;
+      limb.attached = true;
+    })
+  }
 }
 
 function drawLimbs() {
   monster.limbs.forEach(limb => {
-    if (!limb.attached && Math.hypot(limb.x-monster.x, limb.y-monster.y) <= maxVision) {
+    if (!limb.attached && inVision(limb.x, limb.y)) {
       ctx.drawImage(limb.sprite,limb.x,limb.y);
     }
   })

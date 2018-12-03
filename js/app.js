@@ -7,6 +7,7 @@ canvas.width = windowedWidth;
 canvas.height = windowedHeight;
 
 let maxVision = 80;
+let visionItems = [monster];
 let tileSize = 16;
 let setup = true;
 function update() {
