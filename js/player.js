@@ -196,7 +196,7 @@ function checkGameEvents(x,y) {
       }
     })
   });
-  if (boxCollision(x, y, monster.width, monster.height, ladder.state.x, ladder.state.y, ladder.state.width, ladder.state.height)) {
+  if (boxCollision(x, y, monster.width, monster.height, ladder.state.x+30, ladder.state.y, ladder.state.width, ladder.state.height)) {
       levelIndex++;
       monster.limbs.forEach(limb => {
           limb.attached = true;
