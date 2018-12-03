@@ -337,8 +337,13 @@ let level4 = [
 let levels = [level1, level2, level3, level4];
 let levelIndex = 3;
 let currentLevel = levels[levelIndex];
+
 let platesAh = [l1_plates, l2_plates, l3_plates, l4_plates];
 let plates = platesAh[levelIndex];
+
+let restartPointX;
+let restartPointY;
+
 
 const flipMatrix = matrix => (
   matrix[0].map((column, index) => (
@@ -361,6 +366,12 @@ function drawLevel() {
     for (let j = 0; j < currentLevel[i].length; j++) {
       // Get the sprite for the object
       let tile = currentLevel[i][j];
+      if (setup && tile == "s") {
+        monster.x = i * tileSize;
+        monster.y = j * tileSize;
+        restartPointX = monster.x;
+        restartPointY = monster.y;
+      }
       if (typeof tile == "object") {
         if (setup) {
           tile.setCoordinates(i*tileSize,j*tileSize);
@@ -420,7 +431,7 @@ function printLevel() {
         printer += "[";
         for (j = 0; j < currentLevel[i].length; j++) {
             if (currentLevel[i][j] == d) {
-                
+
             }
             if (j == currentLevel[i].length - 1) {
                 printer += "" + currentLevel[i][j];
@@ -436,4 +447,14 @@ function printLevel() {
     }
     printer += "];";
     console.log(printer);
+}
+
+function restartLevel() {
+  monster.limbs.forEach(limb => {
+    limb.attached = true;
+    limb.x = null;
+    limb.y = null;
+  })
+  monster.x = restartPointX;
+  monster.y = restartPointY;
 }
