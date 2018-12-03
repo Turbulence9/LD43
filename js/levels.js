@@ -150,7 +150,7 @@ let level2 = [
 
 let l3_d = new Door();
 l3_d.setVertical();
-let f = new Ladder();
+let l3_f = new Ladder();
 let l3_p0 = new PressurePlate();
 let l3_p1 = new PressurePlate();
 let l3_p2 = new PressurePlate();
@@ -196,7 +196,7 @@ let level3 = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, f, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, l3_f, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -335,14 +335,16 @@ let level4 = [
 
 
 let levels = [level1, level2, level3, level4];
-let levelIndex = 3;
-let currentLevel = levels[levelIndex];
-
+let levelIndex = 0;
 let platesAh = [l1_plates, l2_plates, l3_plates, l4_plates];
+let ladders = [l1_f, l2_f, l3_f, l4_f];
+let currentLevel = levels[levelIndex];
 let plates = platesAh[levelIndex];
+let ladder = ladders[levelIndex];
 
 let restartPointX;
 let restartPointY;
+
 
 
 const flipMatrix = matrix => (
@@ -360,6 +362,9 @@ const flipMatrix = matrix => (
 // Update current level when we make it to the next level (set initially to first level)
 //let currentLevel = exampleLevel;
 function drawLevel() {
+    currentLevel = levels[levelIndex];
+    plates = platesAh[levelIndex];
+    ladder = ladders[levelIndex];
   // Loop through current level tiles and render objects to grid
   // Dynamically changes size of grids depending on number of grids in level to fill the canvas
   for (let i = 0; i < currentLevel.length; i++) {

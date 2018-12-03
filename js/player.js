@@ -196,6 +196,16 @@ function checkGameEvents(x,y) {
       }
     })
   });
+  if (boxCollision(x, y, monster.width, monster.height, ladder.state.x, ladder.state.y, ladder.state.width, ladder.state.height)) {
+      levelIndex++;
+      monster.limbs.forEach(limb => {
+          limb.attached = true;
+          limb.x = null;
+          limb.y = null;
+      })
+      setup = true;
+      drawLevel()
+  }
 }
 
 function tileBlock(x,y) {
