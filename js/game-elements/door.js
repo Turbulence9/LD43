@@ -31,6 +31,10 @@ class Door {
     this.state.y = yValue;
   }
 
+  setDimensions(width, height) {
+    this.state.width = width;
+    this.state.height = height;
+  }
 
   assignConditionObject(conditionObject) {
     this.state.conditionObjects.push(conditionObject);
