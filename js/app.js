@@ -13,6 +13,9 @@ let gamestart = false;
 let win = false;
 let count = 0;
 let bloodCount = 0;
+var volume = 280;
+var musicVolume = 0.4 * (volume / 280);
+music.volume = musicVolume;
 let health = {
   value: 2000,
   max: 2000
