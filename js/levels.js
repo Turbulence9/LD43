@@ -792,7 +792,8 @@ function restartLevel() {
     limb.attached = true;
     limb.x = null;
     limb.y = null;
-  })
+    })
+    health.value = health.max;
   monster.x = restartPointX;
   monster.y = restartPointY;
 }

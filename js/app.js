@@ -59,6 +59,7 @@ function update() {
               limb.x = null;
               limb.y = null;
           })
+          health.value = health.max;
           levelIndex = 0;
           setup = true;
           win = false;
