@@ -53,6 +53,7 @@ function update() {
       if (keyCodes[32] == true) {
           gamestart = false;
           gameover = false;
+          keyCodes[32] = false;
           monster.limbs.forEach(limb => {
               limb.attached = true;
               limb.x = null;
